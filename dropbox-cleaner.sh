@@ -9,8 +9,8 @@ clear
 #Point to where you want the script to look and where it should backup files it replaces
 folder="$(pwd)"
 
-#make all folder names (including case conflict folders yes) lowercase
-rename 'y/A-Z/a-z/' *
+#make all folder names lowercase recursively (directories deep in folder tree) .sh below is a minimal fork from https://gist.github.com/painejake/838544
+bash convert_to_lower-case.sh
 
 
 echo "This script will climb through the $folder tree and repair conflict files"
@@ -39,6 +39,3 @@ find "$folder" -type f -print0 | while read -d $'\0' file; do
         echo
 fi
 done
-
-#make all folder names uppercase (if desired or needed)
-rename 'y/a-z/A-Z/' *
